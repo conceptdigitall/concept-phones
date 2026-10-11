@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-950: #060e20;
+  --color-navy-900: #0a1936;
+  --color-navy-800: #102652;
+  --color-navy-700: #173775;
+  --color-navy-600: #234ca1;
+
+  --color-royal-700: #1d4ed8;
+  --color-royal-600: #2563eb;
+  --color-royal-500: #3b82f6;
+  --color-royal-100: #dbeafe;
+  --color-royal-50: #eff6ff;
+
+  --color-gold-600: #d97706;
+  --color-gold-500: #f59e0b;
+  --color-gold-400: #fbbf24;
+  --color-gold-100: #fef3c7;
+  --color-gold-50: #fffbeb;
+
+  --color-ink-950: #020617;
+  --color-ink-900: #0f172a;
+  --color-ink-800: #1e293b;
+  --color-ink-700: #334155;
+  --color-ink-600: #475569;
+  --color-ink-500: #64748b;
+  --color-ink-400: #94a3b8;
+  --color-ink-300: #cbd5e1;
+  --color-ink-200: #e2e8f0;
+  --color-ink-100: #f1f5f9;
+
+  --color-surface-bg: #f8fafc;
+  --color-surface-card: #ffffff;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-ink-200);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--color-surface-bg);
+    color: var(--color-ink-900);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+.safe-bottom {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
