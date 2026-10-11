@@ -26,10 +26,11 @@
   - Seletor de armazenamento, condição (novo/seminovo) e bateria
   - Simulador de frete por CEP (ViaCEP) e cálculo de parcelas em até 12x
   - Botão de compra direta e CTA WhatsApp para dúvidas
-- [ ] **Fase 5: Carrinho & Checkout Transparente**
+- [x] **Fase 5: Carrinho & Checkout Transparente**
   - Zustand cart store com persistência local
   - Checkout em 3 etapas (Identificação, Entrega, Pagamento Mercado Pago Pix/Cartão)
   - Tela de confirmação do pedido com QR Code Pix dinâmico
-- [ ] **Fase 6: Testes, Lint & Validação**
-  - Testes de regras de negócio (desconto Pix, cálculo de parcelas)
+- [x] **Fase 6: Testes, Lint & Validação**
+  - Testes de regras de negócio (desconto Pix, cálculo de parcelas) com Vitest
   - Auditoria de 350 linhas por arquivo e responsividade mobile
+  - Lint e build de produção 100% aprovados sem erros
