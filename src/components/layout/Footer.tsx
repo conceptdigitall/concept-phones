@@ -1,27 +1,24 @@
 import Link from "next/link";
-import { ShieldCheck, Truck, RefreshCw, Smartphone, CreditCard } from "lucide-react";
+import { ShieldCheck, Truck, RefreshCw, CreditCard } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="bg-navy-950 text-white pt-12 pb-24 md:pb-12 border-t border-navy-800">
+    <footer className="bg-[#090b0e] text-white pt-12 pb-24 md:pb-12 border-t border-neutral-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-navy-800">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-neutral-800/80">
           {/* Coluna 1: Marca & Sobre */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-royal-600 flex items-center justify-center">
-                <Smartphone className="w-4 h-4 text-gold-400" />
-              </div>
-              <span className="text-lg font-bold tracking-tight">
-                Concept<span className="text-royal-500">Phones</span>
+              <span className="text-xl font-black tracking-tight text-white">
+                Nexora<span className="text-[#8e8a7d] font-normal text-xs ml-1 tracking-widest uppercase">Phones</span>
               </span>
             </div>
-            <p className="text-xs text-ink-400 leading-relaxed">
-              Especialistas em smartphones premium Apple e Samsung. Aparelhos novos lacrados com garantia oficial e seminovos rigorosamente revisados com laudo de bateria.
+            <p className="text-xs text-neutral-400 leading-relaxed">
+              Smartphones flagship Apple e Samsung com padrão internacional de inspeção técnica. Novos lacrados e seminovos com laudo de bateria e garantia de até 1 ano.
             </p>
             <div className="flex items-center gap-3 pt-2">
-              <span className="inline-flex items-center gap-1.5 text-xs text-gold-400 bg-navy-900 border border-gold-500/20 px-2.5 py-1 rounded-full">
-                <ShieldCheck className="w-3.5 h-3.5" />
+              <span className="inline-flex items-center gap-1.5 text-xs text-neutral-300 bg-neutral-900 border border-neutral-700/60 px-2.5 py-1 rounded-full">
+                <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
                 Compra 100% Protegida
               </span>
             </div>
@@ -29,28 +26,28 @@ export function Footer() {
 
           {/* Coluna 2: Navegação Rápida */}
           <div>
-            <h4 className="text-sm font-semibold text-ink-100 uppercase tracking-wider mb-4">
-              Categorias
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4">
+              Navegação
             </h4>
-            <ul className="space-y-2.5 text-xs text-ink-400">
+            <ul className="space-y-2.5 text-xs text-neutral-400">
               <li>
-                <Link href="/#apple" className="hover:text-white transition">
-                  iPhones Novos Lacrados
+                <Link href="/#lineup" className="hover:text-white transition">
+                  Linha de Flagships
                 </Link>
               </li>
               <li>
-                <Link href="/#samsung" className="hover:text-white transition">
-                  Samsung Galaxy Linha S & Z
+                <Link href="/#comparador" className="hover:text-white transition">
+                  Tabela Comparativa de Specs
                 </Link>
               </li>
               <li>
-                <Link href="/#seminovos" className="hover:text-white transition">
-                  Seminovos com Saúde da Bateria
+                <Link href="/#showcase" className="hover:text-white transition">
+                  Showcase de Câmera & Chips
                 </Link>
               </li>
               <li>
-                <Link href="/#ofertas" className="hover:text-white transition">
-                  Ofertas Relâmpago Pix
+                <Link href="/#acessorios" className="hover:text-white transition">
+                  Acessórios Originais
                 </Link>
               </li>
             </ul>
@@ -58,48 +55,47 @@ export function Footer() {
 
           {/* Coluna 3: Garantia & Segurança */}
           <div>
-            <h4 className="text-sm font-semibold text-ink-100 uppercase tracking-wider mb-4">
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4">
               Compromisso
             </h4>
-            <ul className="space-y-2.5 text-xs text-ink-400">
+            <ul className="space-y-2.5 text-xs text-neutral-400">
               <li className="flex items-center gap-2">
-                <Truck className="w-3.5 h-3.5 text-royal-500" />
-                <span>Envio rápido com rastreio total</span>
+                <Truck className="w-3.5 h-3.5 text-neutral-300" />
+                <span>Envio expresso com seguro total</span>
               </li>
               <li className="flex items-center gap-2">
-                <RefreshCw className="w-3.5 h-3.5 text-gold-400" />
-                <span>7 dias para troca ou devolução CDC</span>
+                <RefreshCw className="w-3.5 h-3.5 text-neutral-300" />
+                <span>7 dias para troca ou devolução</span>
               </li>
               <li className="flex items-center gap-2">
-                <CreditCard className="w-3.5 h-3.5 text-royal-500" />
-                <span>Mercado Pago: Pix e até 12x no cartão</span>
+                <CreditCard className="w-3.5 h-3.5 text-neutral-300" />
+                <span>Pix 10% OFF ou até 12x no cartão</span>
               </li>
             </ul>
           </div>
 
           {/* Coluna 4: Atendimento & Horário */}
           <div>
-            <h4 className="text-sm font-semibold text-ink-100 uppercase tracking-wider mb-4">
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4">
               Atendimento
             </h4>
-            <div className="space-y-2 text-xs text-ink-400">
+            <div className="space-y-2 text-xs text-neutral-400">
               <p>Segunda a Sábado das 09h às 19h</p>
-              <p className="text-ink-200 font-medium">WhatsApp: (13) 99999-9999</p>
-              <p>E-mail: contato@conceptphones.com.br</p>
-              <p className="pt-2 text-[11px] text-ink-500">
-                Atendimento consultivo para escolha do seu aparelho ideal.
+              <p className="text-white font-medium">WhatsApp: (13) 99999-9999</p>
+              <p>E-mail: contato@nexoraphones.com.br</p>
+              <p className="pt-2 text-[11px] text-neutral-500">
+                Atendimento consultivo e suporte pós-venda dedicado.
               </p>
             </div>
           </div>
         </div>
 
         {/* Rodapé inferior */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-ink-500">
-          <p>© {new Date().getFullYear()} Concept Phones. Todos os direitos reservados.</p>
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-neutral-500">
+          <p>© {new Date().getFullYear()} Nexora Phones · Concept Digital. Todos os direitos reservados.</p>
           <div className="flex items-center gap-4">
             <span>Privacidade e Segurança</span>
             <span>Termos de Garantia</span>
-            <span>Feito com Concept Digital</span>
           </div>
         </div>
       </div>

@@ -2,106 +2,80 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Search, ShoppingBag, Heart, Smartphone, ShieldCheck } from "lucide-react";
+import { Search, ShoppingBag, ChevronDown, User, Sparkles } from "lucide-react";
 import { useCarrinho } from "@/store/cart-store";
-import { useFavoritos } from "@/store/favorites-store";
 
 export function Header() {
   const [termoBusca, setTermoBusca] = useState("");
   const { totalItens, abrirGaveta } = useCarrinho();
-  const { produtoIds } = useFavoritos();
-
   const quantidadeItens = totalItens();
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-ink-200">
-      {/* Top Banner de Confiança */}
-      <div className="bg-navy-950 text-white text-xs py-1.5 px-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-gold-400" />
-            <span className="font-medium text-ink-100">
-              Smartphones 100% Originais · Garantia até 1 ano · Pix com 10% OFF
-            </span>
-          </div>
-          <div className="hidden md:flex items-center gap-4 text-ink-400 text-xs">
-            <span>Envio com seguro para todo o Brasil</span>
-            <span>Atendimento via WhatsApp</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Header */}
+    <header className="sticky top-0 z-40 w-full bg-[#f6f5f0]/90 backdrop-blur-md border-b border-[#e5e2d6] transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 shrink-0 group">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-navy-950 to-royal-700 flex items-center justify-center text-white shadow-md shadow-royal-700/20 group-hover:scale-105 transition-transform">
-            <Smartphone className="w-5 h-5 text-gold-400" />
-          </div>
-          <div>
-            <span className="text-xl font-bold tracking-tight text-navy-950 block leading-tight">
-              Concept<span className="text-royal-600">Phones</span>
+        {/* Logo Estilo Minimalista / Nexora */}
+        <div className="flex items-center gap-8">
+          <Link href="/" className="flex items-center gap-2 group">
+            <span className="text-xl sm:text-2xl font-black tracking-tight text-[#0f1115] transition group-hover:opacity-80">
+              Nexora<span className="text-[#8e8a7d] font-normal text-xs ml-1 tracking-widest uppercase">Phones</span>
             </span>
-            <span className="text-[10px] uppercase tracking-wider text-gold-600 font-semibold block leading-none">
-              Apple & Samsung
-            </span>
-          </div>
-        </Link>
+          </Link>
 
-        {/* Barra de Busca Desktop */}
-        <div className="hidden md:flex flex-1 max-w-md mx-6">
-          <div className="relative w-full">
+          {/* Links de Navegação Desktop */}
+          <nav className="hidden md:flex items-center gap-6 text-xs sm:text-sm font-medium text-[#4a4f59]">
+            <div className="relative group flex items-center gap-1 cursor-pointer hover:text-[#0f1115] transition py-2">
+              <Link href="/#lineup">Modelos</Link>
+              <ChevronDown className="w-3.5 h-3.5 opacity-60 group-hover:rotate-180 transition-transform duration-200" />
+            </div>
+            <Link href="/#comparador" className="hover:text-[#0f1115] transition">
+              Comparador
+            </Link>
+            <Link href="/#acessorios" className="hover:text-[#0f1115] transition">
+              Acessórios
+            </Link>
+            <Link href="/#showcase" className="hover:text-[#0f1115] transition">
+              Showcase
+            </Link>
+            <Link href="/#avaliacoes" className="hover:text-[#0f1115] transition">
+              Avaliações
+            </Link>
+          </nav>
+        </div>
+
+        {/* Lado Direito: Busca, Usuário & Botão Shop Now / Carrinho */}
+        <div className="flex items-center gap-3">
+          {/* Busca estilo Pill */}
+          <div className="hidden sm:flex items-center relative">
             <input
               type="text"
-              placeholder="Buscar iPhone 16, Galaxy S24, seminovos..."
+              placeholder="Buscar smartphone..."
               value={termoBusca}
               onChange={(e) => setTermoBusca(e.target.value)}
-              className="w-full bg-ink-100/80 border border-ink-200 rounded-full py-2 pl-10 pr-4 text-sm text-ink-900 placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-600 transition"
+              className="w-48 lg:w-56 bg-[#ebe8de]/70 hover:bg-[#ebe8de] focus:bg-white border border-[#dedad0] rounded-full py-1.5 pl-8 pr-3 text-xs text-[#121417] placeholder:text-[#888377] focus:outline-none focus:ring-1 focus:ring-[#0f1115] focus:border-[#0f1115] transition"
             />
-            <Search className="w-4 h-4 text-ink-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-3.5 h-3.5 text-[#888377] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
           </div>
-        </div>
 
-        {/* Navegação Desktop */}
-        <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-ink-700">
-          <Link href="/#apple" className="hover:text-royal-600 transition">
-            iPhones
-          </Link>
-          <Link href="/#samsung" className="hover:text-royal-600 transition">
-            Samsung Galaxy
-          </Link>
-          <Link href="/#seminovos" className="hover:text-royal-600 transition flex items-center gap-1">
-            <span>Seminovos</span>
-            <span className="text-[10px] bg-gold-100 text-gold-600 px-1.5 py-0.5 rounded-full font-bold">
-              Bateria OK
-            </span>
-          </Link>
-        </nav>
-
-        {/* Ações (Favoritos & Carrinho) */}
-        <div className="flex items-center gap-2">
+          {/* Ícone de Suporte / Perfil */}
           <Link
             href="/#seminovos"
-            className="hidden sm:flex relative p-2.5 rounded-full hover:bg-ink-100 text-ink-700 transition"
-            title="Favoritos"
+            className="p-2 text-[#4a4f59] hover:text-[#0f1115] rounded-full hover:bg-[#eae7dd] transition"
+            title="Conta & Preferências"
+            aria-label="Perfil"
           >
-            <Heart className="w-5 h-5" />
-            {produtoIds.length > 0 && (
-              <span className="absolute top-1.5 right-1.5 w-4 h-4 bg-royal-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
-                {produtoIds.length}
-              </span>
-            )}
+            <User className="w-4 h-4" />
           </Link>
 
+          {/* Botão Pill Shop Now / Carrinho */}
           <button
             onClick={abrirGaveta}
-            className="relative flex items-center gap-2 bg-navy-950 text-white hover:bg-royal-700 py-2 px-3.5 sm:px-4 rounded-full transition shadow-sm"
-            aria-label="Abrir carrinho"
+            className="flex items-center gap-2 bg-[#0f1115] hover:bg-[#23272f] text-white text-xs font-semibold px-4 py-2 rounded-full shadow-sm active:scale-95 transition-all"
+            aria-label="Abrir carrinho de compras"
           >
-            <ShoppingBag className="w-5 h-5 text-gold-400" />
-            <span className="hidden sm:inline text-xs font-semibold">Carrinho</span>
+            <ShoppingBag className="w-3.5 h-3.5" />
+            <span>Comprar</span>
             {quantidadeItens > 0 && (
-              <span className="bg-gold-500 text-navy-950 text-xs font-bold px-2 py-0.5 rounded-full">
+              <span className="ml-1 bg-white text-[#0f1115] text-[10px] font-bold px-1.5 py-0.2 rounded-full">
                 {quantidadeItens}
               </span>
             )}
