@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Camera, Smartphone, Cpu, Battery, ArrowRight, Check } from "lucide-react";
+import { Camera, Smartphone, Cpu, Battery, ArrowRight, RotateCw, Sparkles } from "lucide-react";
 import { useCarrinho } from "@/store/cart-store";
 import { PRODUTOS } from "@/data/produtos";
 
@@ -27,7 +27,7 @@ const SPECS_DESTAQUE = [
   },
   {
     icone: Cpu,
-    titulo: "Snapdragon 8 Gen 3",
+    titulo: "Snapdragon 8 Gen 3 / A18 Pro",
     descricao: "Poder de sobra com inteligência artificial nativa no chip.",
   },
   {
@@ -37,11 +37,14 @@ const SPECS_DESTAQUE = [
   },
 ];
 
+type ModoVisualizacao = "duo" | "frente" | "traseira";
+
 export function HeroBanner() {
   const [selecionado, setSelecionado] = useState(OPCOES_ARMAZENAMENTO[1]); // 256GB default
+  const [modoVisual, setModoVisual] = useState<ModoVisualizacao>("duo");
+  const [estaVirado3D, setEstaVirado3D] = useState(false);
   const { adicionarItem } = useCarrinho();
 
-  // Produto principal para compra direta
   const produtoPrincipal = PRODUTOS[0]; // iPhone 16 Pro Max
 
   const handleComprar = () => {
@@ -68,10 +71,18 @@ export function HeroBanner() {
     });
   };
 
+  const alternarGiro3D = () => {
+    setEstaVirado3D(!estaVirado3D);
+    if (modoVisual === "duo") {
+      setModoVisual("frente");
+    }
+  };
+
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-[#f7f6f2] via-[#f3f1ea] to-[#ebe8df] text-[#0f1115] pt-12 pb-16 lg:py-20 border-b border-[#e5e1d5]">
-      {/* Luz ambiente e textura mineral suave de fundo */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-white/40 blur-3xl pointer-events-none rounded-full" />
+    <section className="relative overflow-hidden bg-gradient-to-tr from-[#f5f4ef] via-[#eceae2] to-[#faf9f5] animate-mono-gradient text-[#0f1115] pt-12 pb-16 lg:py-20 border-b border-[#e5e1d5]">
+      {/* Luz ambiente monocromática suave */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[750px] h-[450px] bg-white/60 blur-3xl pointer-events-none rounded-full" />
+      <div className="absolute top-10 right-10 w-96 h-96 bg-[#dedad0]/40 blur-3xl pointer-events-none rounded-full" />
       <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-[#ebe8df] to-transparent pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
@@ -91,7 +102,7 @@ export function HeroBanner() {
             </h1>
 
             <p className="text-xs sm:text-sm text-[#5d6370] leading-relaxed max-w-md mx-auto lg:mx-0">
-              Experimente desempenho inigualável, fotografia profissional com sensor periscópio e um design esculpido para quem exige o melhor em tecnologia móvel.
+              Fotografia profissional em titânio e vidro cerâmico. Aparelhos 100% originais com laudo de bateria atestado e garantia oficial de até 1 ano.
             </p>
 
             {/* Preço dinâmico e capacidades */}
@@ -150,32 +161,121 @@ export function HeroBanner() {
             </div>
           </div>
 
-          {/* Coluna Central: Smartphone em Pedestal Mineral */}
-          <div className="lg:col-span-5 relative flex items-center justify-center py-6 lg:py-0">
-            {/* Pedestal Mineral Estilizado */}
-            <div className="relative w-full max-w-sm sm:max-w-md aspect-[4/5] flex items-center justify-center">
-              
-              {/* Efeito de Rocha / Pedestal 3D CSS */}
-              <div className="absolute bottom-4 w-64 sm:w-80 h-16 bg-gradient-to-b from-[#dcd7c9] to-[#c2bcae] rounded-full blur-xs shadow-2xl opacity-90 transform rotate-1 scale-y-50" />
-              <div className="absolute bottom-2 w-72 sm:w-96 h-20 bg-black/15 rounded-full blur-xl pointer-events-none" />
+          {/* Coluna Central: Smartphone 3D Interativo com Flutuação e Rotação */}
+          <div className="lg:col-span-5 relative flex flex-col items-center justify-center py-6 lg:py-0">
+            
+            {/* Controles de Visão 3D (Frente / Traseira / Ambos) */}
+            <div className="flex items-center gap-1.5 bg-white/80 backdrop-blur-md border border-[#dcd7cb] p-1 rounded-full mb-4 shadow-xs z-30">
+              <button
+                onClick={() => { setModoVisual("duo"); setEstaVirado3D(false); }}
+                className={`text-[11px] font-semibold px-3 py-1 rounded-full transition-all ${
+                  modoVisual === "duo"
+                    ? "bg-[#0f1115] text-white"
+                    : "text-[#555a64] hover:text-[#0f1115]"
+                }`}
+              >
+                Visão Dupla
+              </button>
 
-              {/* Aparelho em exibição */}
-              <div className="relative z-10 w-full h-[360px] sm:h-[440px] flex items-center justify-center transition-transform hover:scale-102 duration-500">
-                <Image
-                  src="/images/produtos/iphone-16-pro-max.jpg"
-                  alt="Nexora X1 Smartphone Flagship"
-                  fill
-                  priority
-                  className="object-contain drop-shadow-2xl"
-                />
+              <button
+                onClick={() => { setModoVisual("frente"); setEstaVirado3D(false); }}
+                className={`text-[11px] font-semibold px-3 py-1 rounded-full transition-all ${
+                  modoVisual === "frente" && !estaVirado3D
+                    ? "bg-[#0f1115] text-white"
+                    : "text-[#555a64] hover:text-[#0f1115]"
+                }`}
+              >
+                Frente
+              </button>
+
+              <button
+                onClick={() => { setModoVisual("traseira"); setEstaVirado3D(true); }}
+                className={`text-[11px] font-semibold px-3 py-1 rounded-full transition-all ${
+                  modoVisual === "traseira" || estaVirado3D
+                    ? "bg-[#0f1115] text-white"
+                    : "text-[#555a64] hover:text-[#0f1115]"
+                }`}
+              >
+                Traseira
+              </button>
+
+              <button
+                onClick={alternarGiro3D}
+                className="flex items-center gap-1 text-[11px] font-semibold text-[#1a1d22] hover:bg-[#edeae0] px-2.5 py-1 rounded-full transition active:scale-95 ml-1"
+                title="Girar Aparelho em 3D"
+              >
+                <RotateCw className="w-3 h-3" />
+                <span className="hidden sm:inline">Virar 3D</span>
+              </button>
+            </div>
+
+            {/* Container com perspectiva 3D e levitação */}
+            <div className="relative w-full max-w-sm sm:max-w-md aspect-[4/5] flex items-center justify-center perspective-1200">
+              
+              {/* Sombra de chão dinâmica e sincronizada com a levitação */}
+              <div className="absolute bottom-4 w-56 sm:w-72 h-14 bg-black/25 rounded-full blur-xl animate-float-shadow pointer-events-none" />
+              <div className="absolute bottom-2 w-48 sm:w-60 h-8 bg-[#1f2024]/20 rounded-full blur-md animate-float-shadow pointer-events-none" />
+
+              {/* Elemento Smartphone Flutuante com Giro 3D */}
+              <div
+                onClick={alternarGiro3D}
+                className={`relative z-10 w-full h-[360px] sm:h-[440px] flex items-center justify-center cursor-pointer animate-float-device transform-style-3d transition-transform duration-700 ease-out ${
+                  estaVirado3D ? "rotate-y-180" : ""
+                }`}
+                title="Toque para virar o iPhone em 3D"
+              >
+                {/* 1. Visão Dupla (ambos os lados em PNG 100% transparente) */}
+                {modoVisual === "duo" && !estaVirado3D && (
+                  <div className="relative w-full h-full flex items-center justify-center">
+                    <Image
+                      src="/images/produtos/iphone-16-duo-transparent.png"
+                      alt="iPhone 16 Pro Max Frente e Traseira"
+                      fill
+                      priority
+                      className="object-contain drop-shadow-[0_25px_35px_rgba(0,0,0,0.18)]"
+                    />
+                  </div>
+                )}
+
+                {/* 2. Visão Frente (Face frontal com tela e Dynamic Island) */}
+                {(modoVisual !== "duo" || estaVirado3D) && (
+                  <>
+                    <div className="absolute inset-0 flex items-center justify-center backface-hidden">
+                      <Image
+                        src="/images/produtos/iphone-16-front-transparent.png"
+                        alt="iPhone 16 Pro Max Frente - Display Super Retina"
+                        fill
+                        priority
+                        className="object-contain drop-shadow-[0_25px_35px_rgba(0,0,0,0.18)]"
+                      />
+                    </div>
+
+                    {/* 3. Visão Traseira (Titânio Natural e Câmeras Triplas) */}
+                    <div className="absolute inset-0 flex items-center justify-center rotate-y-180 backface-hidden">
+                      <Image
+                        src="/images/produtos/iphone-16-back-transparent.png"
+                        alt="iPhone 16 Pro Max Traseira - Titânio Natural"
+                        fill
+                        priority
+                        className="object-contain drop-shadow-[0_25px_35px_rgba(0,0,0,0.18)]"
+                      />
+                    </div>
+                  </>
+                )}
               </div>
 
               {/* Tag Flutuante de Destaque */}
-              <div className="absolute top-6 right-4 sm:right-6 bg-white/90 backdrop-blur-md border border-[#e2decfa0] shadow-sm rounded-full py-1.5 px-3.5 flex items-center gap-1.5 z-20">
+              <div className="absolute top-2 right-4 sm:right-6 bg-white/90 backdrop-blur-md border border-[#dedad0] shadow-sm rounded-full py-1.5 px-3.5 flex items-center gap-1.5 z-20 pointer-events-none">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span className="text-[10px] font-bold text-[#1f2329] uppercase tracking-wider">
                   Pronta Entrega
                 </span>
+              </div>
+
+              {/* Dica de interação sutil */}
+              <div className="absolute -bottom-2 text-[10px] text-[#7c786c] flex items-center gap-1 bg-white/60 backdrop-blur-xs px-2.5 py-0.5 rounded-full border border-[#e5e1d5] pointer-events-none">
+                <RotateCw className="w-2.5 h-2.5" />
+                <span>Toque para virar em 3D</span>
               </div>
             </div>
           </div>
